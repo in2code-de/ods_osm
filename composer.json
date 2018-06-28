@@ -1,0 +1,38 @@
+{
+  "name" : "bobosch/ods-osm",
+  "description" : "Add an interactive OpenStreetMap map to your website. Can also show other OpenLayers compatible maps.",
+  "type" : "typo3-cms-extension",
+  "keywords" : ["TYPO3 CMS", "OSM", "maps", "OpenStreetMap", "OpenLayers", "Leaflet"],
+  "license" : "GPL-2.0+",
+  "authors" : [
+    {
+      "name" : "Robert Heel",
+      "role" : "Developer"
+    }
+  ],
+  "support": {
+    "source": "https://github.com/bobosch/ods_osm",
+    "issues": "https://github.com/bobosch/ods_osm"
+  },
+  "replace": {
+    "ods_osm": "self.version",
+    "typo3-ter/ods-osm": "self.version",
+    "bobosch/ods-osm": "self.version"
+  },
+  "require" : {
+    "typo3/cms-core" : ">=6.2.0 <=8.7.99"
+  },
+  "autoload": {
+    "classmap": ["Classes/", "func_wizards/","pi1/", "res/","wizard/"],
+    "files": [
+      "class.tx_lonlat.php",
+      "class.tx_odsosm_common.php",
+      "class.tx_odsosm_div.php",
+      "class.tx_odsosm_leaflet.php",
+      "class.tx_odsosm_openlayers.php",
+      "class.tx_odsosm_openlayers3.php",
+      "class.tx_odsosm_static.php",
+      "class.tx_odsosm_tcemain.php"
+    ]
+  }
+}
