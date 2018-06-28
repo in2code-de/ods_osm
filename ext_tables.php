@@ -44,8 +44,7 @@ $tempColumns = array (
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
 	array(
 		'LLL:EXT:ods_osm/locallang_db.xml:tt_content.list_type_pi1',
-		$_EXTKEY . '_pi1',
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'ext_icon.gif'
+		$_EXTKEY . '_pi1'
 	),
 	'list_type'
 );
