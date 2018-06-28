@@ -2,6 +2,9 @@
 if (!defined('TYPO3_MODE')) die('Access denied.');
 
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 
 /* --------------------------------------------------
 	Extend existing tables
@@ -78,7 +81,7 @@ if (TYPO3_MODE == 'BE') {
 	);
 }
 
-if (TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3\CMS\Core\Utility\VersionNumberUtility::getCurrentTypo3Version()) < 8000000) {
+if (VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version()) < 8000000) {
 	// TYPO3 6.2 compatibility
 	// Register colorpicker wizard
 	ExtensionManagementUtility::addModulePath(
@@ -90,7 +93,7 @@ if (TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(T
 /**
  * Register icons
  */
-$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$iconRegistry = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
 $iconRegistry->registerIcon(
     'ods_osm',
     \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
