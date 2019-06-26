@@ -47,7 +47,7 @@ function mapMarker(oMap, oLayer, a){
 				}
 				this.popup.show();
 			} else {
-				if(evt.type=='mousedown') {
+				if(evt.type=='mousedown' || 'touchstart') {
 					// exclusive uses removePopup(), so need to addPopup() again
 					if (a['show_popups']==3) {
 						oMap.addPopup(this.popup,true);
