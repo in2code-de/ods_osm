@@ -67,6 +67,7 @@ function mapMarker(oMap, oLayer, a){
 			oMarker.events.register('mouseout', feature, mouseAction);
 		}else{
 			oMarker.events.register('mousedown', feature, mouseAction);
+			oMarker.events.register('touchstart', feature, mouseAction);
 		}
 	}
 
