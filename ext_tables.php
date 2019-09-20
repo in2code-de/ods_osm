@@ -1,18 +1,23 @@
 <?php
 if (!defined('TYPO3_MODE')) die('Access denied.');
 
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
+
 /* --------------------------------------------------
 	Extend existing tables
 -------------------------------------------------- */
 
 $tempColumns = array (
-	'tx_odsosm_marker' => array (        
-		'exclude' => 1,        
-		'label' => 'LLL:EXT:ods_osm/locallang_db.xml:tt_address_group.tx_odsosm_marker',        
+	'tx_odsosm_marker' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:ods_osm/locallang_db.xml:tt_address_group.tx_odsosm_marker',
 		'config' => array (
-			'type' => 'group',    
-			'internal_type' => 'db',    
-			'allowed' => 'tx_odsosm_marker',    
+			'type' => 'group',
+			'internal_type' => 'db',
+			'allowed' => 'tx_odsosm_marker',
 			'size' => 1,
 			'minitems' => 0,
 			'maxitems' => 1,
@@ -20,56 +25,80 @@ $tempColumns = array (
 	),
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_groups',$tempColumns,1);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_groups','tx_odsosm_marker;;;;1-1-1');
+ExtensionManagementUtility::addTCAcolumns('fe_groups',$tempColumns,1);
+ExtensionManagementUtility::addToAllTCAtypes('fe_groups','tx_odsosm_marker;;;;1-1-1');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category',$tempColumns,1);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_odsosm_marker;;;;1-1-1');
+ExtensionManagementUtility::addTCAcolumns('sys_category',$tempColumns,1);
+ExtensionManagementUtility::addToAllTCAtypes('sys_category','tx_odsosm_marker;;;;1-1-1');
 
 /* --------------------------------------------------
 	New tables
 -------------------------------------------------- */
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_marker');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_marker');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_track');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_odsosm_track');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_track');
+ExtensionManagementUtility::addToInsertRecords('tx_odsosm_track');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_vector');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_odsosm_vector');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_odsosm_vector');
+ExtensionManagementUtility::addToInsertRecords('tx_odsosm_vector');
 
 /* --------------------------------------------------
 	Plugin
 -------------------------------------------------- */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
+ExtensionManagementUtility::addPlugin(
 	array(
 		'LLL:EXT:ods_osm/locallang_db.xml:tt_content.list_type_pi1',
-		$_EXTKEY . '_pi1',
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'ext_icon.gif'
+		$_EXTKEY . '_pi1'
 	),
 	'list_type'
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform.xml');
+
+ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform_basic.xml');
+
+if (ExtensionManagementUtility::isLoaded('cal')) {
+	ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform_cal.xml');
+}
+
+if (ExtensionManagementUtility::isLoaded('tt_address')) {
+	ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform_ttaddress.xml');
+}
+
+if (ExtensionManagementUtility::isLoaded('cal') && ExtensionManagementUtility::isLoaded('tt_address')) {
+	ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform_cal_ttaddress.xml');
+}
+
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] ='pi_flexform';
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages,recursive';
 
 if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_odsosm_pi1_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'pi1/class.tx_odsosm_pi1_wizicon.php';
 
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::insertModuleFunction(
+	ExtensionManagementUtility::insertModuleFunction(
 		'web_func',
 		'tx_odsosm_geocodeWizard',
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'func_wizards/class.tx_odsosm_geocodeWizard.php',
+		ExtensionManagementUtility::extPath($_EXTKEY) . 'func_wizards/class.tx_odsosm_geocodeWizard.php',
 		'LLL:EXT:ods_osm/locallang.xml:wiz_geocode'
 	);
 }
 
-if (TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3\CMS\Core\Utility\VersionNumberUtility::getCurrentTypo3Version()) < 8000000) {
+if (VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getCurrentTypo3Version()) < 8000000) {
 	// TYPO3 6.2 compatibility
 	// Register colorpicker wizard
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath(
+	ExtensionManagementUtility::addModulePath(
 		'wizard_coordinatepicker',
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'wizard/'
+		ExtensionManagementUtility::extPath($_EXTKEY) . 'wizard/'
 	);
 }
+
+/**
+ * Register icons
+ */
+$iconRegistry = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$iconRegistry->registerIcon(
+    'ods_osm',
+    \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+    ['source' => 'EXT:ods_osm/Resources/Public/Icons/osm.png']
+);
+
+ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ods_osm/Configuration/TSConfig/ContentElementWizard.typoscript">');
 ?>

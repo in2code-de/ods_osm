@@ -47,7 +47,7 @@ function mapMarker(oMap, oLayer, a){
 				}
 				this.popup.show();
 			} else {
-				if(evt.type=='mousedown') {
+				if(evt.type=='mousedown' || 'touchstart') {
 					// exclusive uses removePopup(), so need to addPopup() again
 					if (a['show_popups']==3) {
 						oMap.addPopup(this.popup,true);
@@ -67,6 +67,7 @@ function mapMarker(oMap, oLayer, a){
 			oMarker.events.register('mouseout', feature, mouseAction);
 		}else{
 			oMarker.events.register('mousedown', feature, mouseAction);
+			oMarker.events.register('touchstart', feature, mouseAction);
 		}
 	}
 

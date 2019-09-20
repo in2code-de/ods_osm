@@ -1,5 +1,4 @@
 <?php
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('ods_osm') . 'class.tx_odsosm_div.php');
 
 class tx_odsosm_tcemain {
 	var $lon=array();

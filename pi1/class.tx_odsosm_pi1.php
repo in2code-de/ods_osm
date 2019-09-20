@@ -379,13 +379,13 @@ class tx_odsosm_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		if($script){
 			switch ($this->config['JSlibrary']) {
 				case 'jquery':
-					$pageRenderer->addJsInlineCode(
+					$pageRenderer->addJsFooterInlineCode(
 						$this->config['id'],
 						'$(document).ready(function() {' . $script . '});'
 					);
 					break;
 				default:
-					$pageRenderer->addJsInlineCode(
+					$pageRenderer->addJsFooterInlineCode(
 						$this->config['id'],
 						'document.addEventListener("DOMContentLoaded", function(){' . $script . '}, false);'
 					);

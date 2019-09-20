@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems.plugins {
+    elements {
+        plugin_name {
+            iconIdentifier = ods_osm
+            title = LLL:EXT:ods_osm/locallang.xml:pi1_title
+            description = LLL:EXT:ods_osm/locallang.xml:pi1_plus_wiz_description
+            tt_content_defValues {
+                CType = list
+                list_type = ods_osm_pi1
+            }
+        }
+    }
+}
