@@ -1,0 +1,17 @@
+# IDE spezielle Dateien
+msi.iws
+.idea
+nbproject
+.svn
+.vscode
+
+# OS spezielle Dateien
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
