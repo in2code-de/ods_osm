@@ -17,7 +17,7 @@ class tx_odsosm_static extends tx_odsosm_common {
 							$icon = $marker['icon'];
 						}else{
 							$marker=array('size_x'=>21,'size_y'=>25,'offset_x'=>-11,'offset_y'=>-25);
-							$icon='EXT:ods_osm/res/OpenLayers/img/marker.png';
+							$icon='EXT:ods_osm/Resources/Public/JavaScripts/OpenLayers/img/marker.png';
 						}
 						break 3;
 				}
