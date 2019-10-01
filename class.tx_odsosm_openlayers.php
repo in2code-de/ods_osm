@@ -4,7 +4,7 @@ class tx_odsosm_openlayers extends tx_odsosm_common {
 	public $P;
 
 	public function getMapCore($backpath=''){
-		$path=($backpath ? $backpath : $GLOBALS['TSFE']->absRefPrefix) . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('ods_osm') . 'res/';
+		$path=($backpath ? $backpath : $GLOBALS['TSFE']->absRefPrefix) . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('ods_osm') . 'Resources/Public/JavaScripts/';
 		$this->scripts=array(
 			($this->config['path_openlayers'] ? $this->config['path_openlayers'] : ($this->config['local_js'] ? $path.'OpenLayers' : 'https://openlayers.org/api')).'/OpenLayers.js',
 			$path.'tx_odsosm_openlayers.js',
@@ -121,7 +121,7 @@ class tx_odsosm_openlayers extends tx_odsosm_common {
 					$marker = $item['tx_odsosm_marker'];
 				}else{
 					$marker=array(
-						'icon' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('ods_osm') . 'res/OpenLayers/img/marker.png',
+						'icon' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath('ods_osm') . 'Resources/Public/JavaScripts/OpenLayers/img/marker.png',
 						'type' => 'image',
 						'size_x' => 21,
 						'size_y' => 25,
