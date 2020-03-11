@@ -46,14 +46,6 @@ ExtensionManagementUtility::addToInsertRecords('tx_odsosm_vector');
 /* --------------------------------------------------
 	Plugin
 -------------------------------------------------- */
-ExtensionManagementUtility::addPlugin(
-	array(
-		'LLL:EXT:ods_osm/locallang_db.xml:tt_content.list_type_pi1',
-		$_EXTKEY . '_pi1'
-	),
-	'list_type'
-);
-
 ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY.'_pi1', 'FILE:EXT:'.$_EXTKEY . '/pi1/flexform_basic.xml');
 
 if (ExtensionManagementUtility::isLoaded('cal')) {
